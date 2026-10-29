@@ -1,0 +1,65 @@
+/* Design tokens: colour, type, spacing. Light and dark themes follow the device setting. */
+
+:root {
+  color-scheme: light dark;
+
+  --bg: #f3f7f5;
+  --bg-glow: rgba(31, 158, 134, 0.10);
+  --surface: #ffffff;
+  --surface-2: #eaf1ee;
+  --border: rgba(16, 40, 34, 0.10);
+  --text: #10221e;
+  --text-2: #4a5e59;
+  --text-3: #7c8e89;
+
+  --accent: #17917a;
+  --accent-strong: #0f7563;
+  --accent-soft: rgba(23, 145, 122, 0.12);
+  --on-accent: #ffffff;
+
+  --ember: #e8622f;
+  --ember-soft: rgba(232, 98, 47, 0.13);
+  --danger: #c93c31;
+  --gold: #d49a2a;
+
+  --shadow: 0 1px 2px rgba(16, 40, 34, 0.05), 0 10px 30px rgba(16, 40, 34, 0.07);
+  --shadow-lg: 0 20px 60px rgba(16, 40, 34, 0.18);
+
+  --font: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-display: ui-rounded, 'SF Pro Rounded', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+  --radius-lg: 24px;
+  --radius: 18px;
+  --radius-sm: 12px;
+
+  --gutter: 16px;
+  --max-width: 560px;
+  --nav-h: 64px;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #081214;
+    --bg-glow: rgba(63, 207, 174, 0.10);
+    --surface: #0f1d20;
+    --surface-2: #16292d;
+    --border: rgba(200, 240, 230, 0.09);
+    --text: #e6f2ef;
+    --text-2: #a2b7b2;
+    --text-3: #6e8682;
+
+    --accent: #3fcfae;
+    --accent-strong: #7be3c9;
+    --accent-soft: rgba(63, 207, 174, 0.14);
+    --on-accent: #04221b;
+
+    --ember: #ff7a45;
+    --ember-soft: rgba(255, 122, 69, 0.15);
+    --danger: #ff6b5e;
+
+    --shadow: 0 1px 0 rgba(255, 255, 255, 0.03) inset, 0 10px 30px rgba(0, 0, 0, 0.35);
+    --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.6);
+  }
+}

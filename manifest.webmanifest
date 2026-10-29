@@ -1,0 +1,17 @@
+{
+  "name": "Exhale: 30 Days Smoke-Free",
+  "short_name": "Exhale",
+  "description": "A science-backed 30-day protocol to quit smoking.",
+  "start_url": "./#/today",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#081214",
+  "theme_color": "#081214",
+  "icons": [
+    { "src": "assets/icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "assets/icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "assets/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
+    { "src": "assets/icons/icon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}
