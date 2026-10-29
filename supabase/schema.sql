@@ -19,3 +19,8 @@ create table if not exists public.push_subscriptions (
 
 -- Lock the table down: only the server (secret / service_role key) can read or write it.
 alter table public.push_subscriptions enable row level security;
+
+-- Give the server role access explicitly (needed when "Automatically expose new tables" is off).
+-- The public anon / authenticated roles get nothing.
+grant select, insert, update, delete on table public.push_subscriptions to service_role;
+revoke all on table public.push_subscriptions from anon, authenticated;
