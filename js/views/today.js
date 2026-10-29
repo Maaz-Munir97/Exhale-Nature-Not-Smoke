@@ -4,6 +4,7 @@ import { durationShort, greeting, money, number, plural, shortDate, splitDuratio
 import { toDateKey } from '../core/time.js';
 import { MOOD_REPLIES, MOODS, TIPS } from '../data/content.js';
 import { setMood } from '../services/actions.js';
+import { pushSupport } from '../services/notifications.js';
 import { PHASE_LABELS, PROGRAM_LENGTH, dateForDay, quitDayNumber } from '../services/program.js';
 import { computeStats } from '../services/stats.js';
 import { cigarettesOn, dailyAllowance, suggestedGapMinutes } from '../services/taper.js';
@@ -138,6 +139,13 @@ export default {
             : 'Read through the Plan so you know what is coming.'}</p>
           <a class="btn btn--ghost btn--sm" href="#/plan">Open the Plan ${icons.chevron}</a>
         </section>`}
+
+      ${state.reminders.enabled || pushSupport() === 'unsupported' ? '' : `
+        <a href="#/settings" class="reminder-cta">
+          <span class="card-icon">${icons.bell}</span>
+          <span><strong>Turn on daily reminders</strong><small>Today's mission every morning, a check-in every evening</small></span>
+          ${icons.chevron}
+        </a>`}
 
       ${s.isQuit ? moodCard(state) : ''}
 

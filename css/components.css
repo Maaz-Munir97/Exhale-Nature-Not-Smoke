@@ -20,6 +20,21 @@
   transform: scale(0.98);
 }
 
+.btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.notice {
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  background: var(--accent-softer);
+  border: 1px solid rgba(47, 107, 242, 0.18);
+  color: var(--text-2);
+  font-size: 14px;
+}
+
 .btn--primary { background: var(--grad-primary); color: var(--on-accent); box-shadow: var(--shadow-blue); }
 .btn--primary:hover { filter: brightness(1.05); }
 .btn--ember { background: var(--ember); color: #fff; }

@@ -146,6 +146,21 @@
   to { transform: scale(1.35); opacity: 0; }
 }
 
+.reminder-cta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: var(--radius);
+  background: linear-gradient(135deg, var(--accent-soft), var(--accent-softer)), var(--surface);
+  border: 1.5px dashed rgba(47, 107, 242, 0.35);
+  color: var(--text);
+}
+
+.reminder-cta > span:nth-child(2) { display: grid; flex: 1; }
+.reminder-cta small { color: var(--text-2); font-size: 13px; }
+.reminder-cta > .icon { color: var(--accent); }
+
 .tip-card { background: linear-gradient(160deg, var(--accent-softer), transparent 60%), var(--surface); }
 .tip-card .eyebrow { display: flex; align-items: center; gap: 6px; color: var(--accent); }
 .tip-card .eyebrow .icon { width: 16px; height: 16px; }

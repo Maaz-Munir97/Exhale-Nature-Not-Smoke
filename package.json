@@ -1,0 +1,13 @@
+{
+  "name": "exhale",
+  "version": "1.2.0",
+  "private": true,
+  "type": "module",
+  "description": "Exhale: a 30-day quit smoking PWA with daily push reminders",
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "web-push": "^3.6.7"
+  }
+}

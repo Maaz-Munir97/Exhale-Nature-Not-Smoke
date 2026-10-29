@@ -3,8 +3,10 @@ import { esc } from '../core/dom.js';
 import { shortDate } from '../core/format.js';
 import { SOURCES } from '../data/content.js';
 import { exportData, importData, resetAll, updateProfile } from '../services/actions.js';
+import { syncReminders } from '../services/notifications.js';
 import { MODES, quitDate } from '../services/program.js';
 import { icons } from '../components/icons.js';
+import { bindRemindersCard, remindersCard } from '../components/remindersCard.js';
 import { toast } from '../components/toast.js';
 
 export default {
@@ -16,6 +18,8 @@ export default {
         <a href="#/today" class="icon-btn" aria-label="Back">${icons.back}</a>
         <div class="grow"><p class="eyebrow">Settings</p><h1 class="h1">Your profile</h1></div>
       </header>
+
+      ${remindersCard(state)}
 
       <form class="card stack" data-profile>
         <label class="field"><span class="field-label">First name</span>
@@ -68,8 +72,11 @@ export default {
         mode: d.get('mode'),
         startDate: d.get('startDate'),
       });
+      syncReminders().catch(() => {});
       toast('Saved');
     });
+
+    bindRemindersCard(host);
 
     host.addEventListener('click', (e) => {
       if (e.target.closest('[data-export]')) exportData();

@@ -24,6 +24,8 @@ export function createDefaultState() {
     // { 'YYYY-MM-DD': { mood } }
     checkins: {},
     toolkit: { ifThen: [], letter: '', supporters: [] },
+    // Daily push reminders (local hours, 0–23)
+    reminders: { enabled: false, morning: 9, evening: 21 },
     createdAt: new Date().toISOString(),
   };
 }
@@ -44,6 +46,7 @@ export function normalize(data) {
       ifThen: arr(data.toolkit?.ifThen),
       supporters: arr(data.toolkit?.supporters),
     },
+    reminders: { ...base.reminders, ...obj(data.reminders) },
     reasons: arr(data.reasons),
     logs: arr(data.logs),
     missions: obj(data.missions),

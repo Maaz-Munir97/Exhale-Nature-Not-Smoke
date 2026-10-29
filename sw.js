@@ -1,6 +1,6 @@
 // Service worker: makes Exhale work offline after the first visit.
 // Bump VERSION whenever you deploy changes so phones pick up the new files.
-const VERSION = 'exhale-v1.1.0';
+const VERSION = 'exhale-v1.2.0';
 
 const APP_SHELL = [
   './',
@@ -26,6 +26,7 @@ const APP_SHELL = [
   './js/data/missions.js',
   './js/data/recovery.js',
   './js/services/actions.js',
+  './js/services/notifications.js',
   './js/services/program.js',
   './js/services/stats.js',
   './js/services/taper.js',
@@ -35,6 +36,7 @@ const APP_SHELL = [
   './js/components/logSheet.js',
   './js/components/lungTree.js',
   './js/components/missionCard.js',
+  './js/components/remindersCard.js',
   './js/components/nav.js',
   './js/components/ring.js',
   './js/components/sheet.js',
@@ -64,7 +66,8 @@ self.addEventListener('activate', (event) => {
 
 self.addEventListener('fetch', (event) => {
   const { request } = event;
-  if (request.method !== 'GET' || new URL(request.url).origin !== self.location.origin) return;
+  const url = new URL(request.url);
+  if (request.method !== 'GET' || url.origin !== self.location.origin || url.pathname.startsWith('/api/')) return;
 
   // Network first: you always get the latest deploy when online; the cache is the offline fallback.
   event.respondWith(
@@ -80,5 +83,38 @@ self.addEventListener('fetch', (event) => {
         const cached = await caches.match(request, { ignoreSearch: true });
         return cached || (request.mode === 'navigate' ? caches.match('./index.html') : Response.error());
       }),
+  );
+});
+
+// ---- Daily reminders (Web Push) ----
+
+self.addEventListener('push', (event) => {
+  let data = {};
+  try {
+    data = event.data ? event.data.json() : {};
+  } catch {
+    data = { body: event.data?.text() };
+  }
+  event.waitUntil(
+    self.registration.showNotification(data.title || 'Exhale', {
+      body: data.body || '',
+      icon: './assets/icons/icon-192.png',
+      badge: './assets/icons/icon-192.png',
+      tag: data.tag || 'exhale-reminder',
+      data: { url: data.url || '#/today' },
+    }),
+  );
+});
+
+// Tapping a notification opens Exhale (or focuses it) on the right screen.
+self.addEventListener('notificationclick', (event) => {
+  event.notification.close();
+  const target = new URL(`./${event.notification.data?.url || ''}`, self.registration.scope).href;
+  event.waitUntil(
+    self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then((windows) => {
+      const open = windows.find((w) => w.url.startsWith(self.registration.scope));
+      if (open) return open.focus().then((w) => w?.navigate?.(target)).catch(() => {});
+      return self.clients.openWindow(target);
+    }),
   );
 });
