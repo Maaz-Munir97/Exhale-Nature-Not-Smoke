@@ -16,7 +16,7 @@ import { toast } from '../components/toast.js';
 function reasonsSection(reasons) {
   return `
     <section class="card" id="why">
-      <header class="card-head"><h3>My why</h3></header>
+      <header class="card-head"><h3><span class="card-icon">${icons.heart}</span>My why</h3></header>
       <ul class="item-list">
         ${reasons.map((r, i) => `<li><span>${esc(r)}</span><button class="icon-btn icon-btn--sm" data-remove-reason="${i}" aria-label="Remove reason">${icons.close}</button></li>`).join('')}
       </ul>
@@ -30,7 +30,7 @@ function reasonsSection(reasons) {
 function ifThenSection(plans) {
   return `
     <section class="card" id="if-then">
-      <header class="card-head"><h3>If-Then plans</h3></header>
+      <header class="card-head"><h3><span class="card-icon">${icons.shield}</span>If-Then plans</h3></header>
       <p class="muted">Decide now, so you don't have to decide during a craving.</p>
       <ul class="plan-list">
         ${plans
@@ -57,7 +57,7 @@ function ifThenSection(plans) {
 function letterSection(letter) {
   return `
     <section class="card" id="letter">
-      <header class="card-head"><h3>Letter to future me</h3></header>
+      <header class="card-head"><h3><span class="card-icon">${icons.message}</span>Letter to future me</h3></header>
       <p class="muted">Write to yourself at your next tough moment. It appears in SOS.</p>
       <form class="stack" data-form="letter">
         <textarea name="letter" rows="6" maxlength="2000" placeholder="Hey, I know this craving feels huge right now. Remember why we started…">${esc(letter)}</textarea>
@@ -69,7 +69,7 @@ function letterSection(letter) {
 function supportSection(supporters) {
   return `
     <section class="card" id="support">
-      <header class="card-head"><h3>Support team</h3></header>
+      <header class="card-head"><h3><span class="card-icon">${icons.phone}</span>Support team</h3></header>
       <ul class="item-list">
         ${supporters
           .map(
@@ -95,7 +95,7 @@ function supportSection(supporters) {
 function helpSection() {
   return `
     <section class="card">
-      <header class="card-head"><h3>Medicine & expert help</h3></header>
+      <header class="card-head"><h3><span class="card-icon">${icons.sparkle}</span>Medicine & expert help</h3></header>
       <p>Stop-smoking medicine roughly <strong>doubles</strong> your chances. Options include:</p>
       <ul class="bullets">
         <li><strong>Combination NRT:</strong> a daily patch plus gum, lozenge or spray for breakthrough cravings.</li>

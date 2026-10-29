@@ -1,14 +1,14 @@
 // The Lung Tree: your bronchi drawn as two mirrored trees.
 //  - growth (0–1): how many branches are visible (program progress)
 //  - leaves:       one leaf per craving beaten / mission completed
-//  - health (0–1): colour shifts from smoky grey to living green with your streak
+//  - health (0–1): colour shifts from smoky grey to clear blue with your streak
 import { clamp } from '../core/dom.js';
 
 const W = 320;
 const H = 300;
 const MAX_DEPTH = 7;
-const SMOKE = [138, 143, 147];
-const ALIVE = [63, 190, 160];
+const SMOKE = [150, 158, 176];
+const ALIVE = [47, 107, 242];
 
 function seededRandom(seed) {
   return () => {
@@ -82,10 +82,10 @@ export function lungTree({ growth = 0, leaves = 0, health = 0 }) {
       const x = s.x1 + (s.x2 - s.x1) * t;
       const y = s.y1 + (s.y2 - s.y1) * t;
       const rot = (-s.angle * 180) / Math.PI + (k === 0 ? 30 : -40);
-      const hue = 140 + ((i * 37) % 40);
+      const hue = 195 + ((i * 37) % 30);
       return `<ellipse cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" rx="5.5" ry="2.6"
         transform="rotate(${rot.toFixed(0)} ${x.toFixed(1)} ${y.toFixed(1)})"
-        fill="hsl(${hue} 60% 52%)" style="animation-delay:${(0.6 + i * 0.015).toFixed(2)}s" />`;
+        fill="hsl(${hue} 90% 60%)" style="animation-delay:${(0.6 + i * 0.015).toFixed(2)}s" />`;
     })
     .join('');
 

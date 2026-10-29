@@ -94,7 +94,7 @@ export default {
       <p class="footnote">*Estimate: about 20 minutes of life expectancy per cigarette (UCL, 2025).</p>
 
       <section class="card">
-        <header class="card-head"><h3>Body recovery</h3>${nextMilestone && s.isQuit ? `<span class="eyebrow">Next in ${durationShort(nextMilestone.remainingMs)}</span>` : ''}</header>
+        <header class="card-head"><h3><span class="card-icon">${icons.heart}</span>Body recovery</h3>${nextMilestone && s.isQuit ? `<span class="eyebrow">Next in ${durationShort(nextMilestone.remainingMs)}</span>` : ''}</header>
         ${s.isQuit ? '' : '<p class="muted">Your recovery clock starts on quit day.</p>'}
         <ol class="timeline">
           ${milestones
@@ -115,16 +115,16 @@ export default {
 
       ${state.logs.length ? `
         <section class="card">
-          <header class="card-head"><h3>Urges by hour</h3></header>
+          <header class="card-head"><h3><span class="card-icon">${icons.clock}</span>Urges by hour</h3></header>
           ${hourChart(state.logs)}
         </section>
         <section class="card">
-          <header class="card-head"><h3>Top triggers</h3></header>
+          <header class="card-head"><h3><span class="card-icon">${icons.flame}</span>Top triggers</h3></header>
           ${triggerChart(state.logs)}
         </section>` : ''}
 
       <section class="card">
-        <header class="card-head"><h3>History</h3></header>
+        <header class="card-head"><h3><span class="card-icon">${icons.plan}</span>History</h3></header>
         ${historyList(state.logs)}
       </section>`;
 

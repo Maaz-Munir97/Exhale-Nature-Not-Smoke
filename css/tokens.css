@@ -1,65 +1,56 @@
-/* Design tokens: colour, type, spacing. Light and dark themes follow the device setting. */
+/* Design tokens: a clean white + blue theme. Light only, so it looks the same on every phone. */
 
 :root {
-  color-scheme: light dark;
+  color-scheme: light;
 
-  --bg: #f3f7f5;
-  --bg-glow: rgba(31, 158, 134, 0.10);
+  /* Surfaces: soft "low white" with a hint of blue */
+  --bg: #f4f7fc;
+  --bg-glow: rgba(59, 130, 246, 0.10);
   --surface: #ffffff;
-  --surface-2: #eaf1ee;
-  --border: rgba(16, 40, 34, 0.10);
-  --text: #10221e;
-  --text-2: #4a5e59;
-  --text-3: #7c8e89;
+  --surface-2: #f1f5fd;
+  --surface-3: #e6eefc;
+  --border: rgba(37, 78, 160, 0.10);
+  --border-strong: rgba(37, 78, 160, 0.18);
 
-  --accent: #17917a;
-  --accent-strong: #0f7563;
-  --accent-soft: rgba(23, 145, 122, 0.12);
+  /* Text: deep navy, never pure black */
+  --text: #122046;
+  --text-2: #4b5878;
+  --text-3: #8a95b0;
+
+  /* Primary blue (bright, not dark) */
+  --accent: #2f6bf2;
+  --accent-strong: #1f54d6;
+  --accent-light: #5b9bff;
+  --accent-soft: rgba(47, 107, 242, 0.10);
+  --accent-softer: rgba(47, 107, 242, 0.06);
   --on-accent: #ffffff;
+  --sky: #38b6ff;
 
-  --ember: #e8622f;
-  --ember-soft: rgba(232, 98, 47, 0.13);
-  --danger: #c93c31;
-  --gold: #d49a2a;
+  --grad-primary: linear-gradient(135deg, #4c8dff 0%, #2f6bf2 55%, #2a5fe6 100%);
+  --grad-hero: linear-gradient(150deg, #5aa0ff 0%, #3474f5 45%, #2a5ee8 100%);
+  --grad-sky: linear-gradient(135deg, #5ec4ff 0%, #3b82f6 100%);
 
-  --shadow: 0 1px 2px rgba(16, 40, 34, 0.05), 0 10px 30px rgba(16, 40, 34, 0.07);
-  --shadow-lg: 0 20px 60px rgba(16, 40, 34, 0.18);
+  /* Supporting colours (used sparingly) */
+  --ember: #f2705e;          /* slips & the ember game */
+  --ember-soft: rgba(242, 112, 94, 0.12);
+  --danger: #e0483d;
+  --gold: #f4a62a;
 
-  --font: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  --font-display: ui-rounded, 'SF Pro Rounded', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --shadow-sm: 0 1px 2px rgba(18, 32, 70, 0.05);
+  --shadow: 0 1px 2px rgba(18, 32, 70, 0.04), 0 8px 24px rgba(37, 78, 160, 0.08);
+  --shadow-lg: 0 24px 60px rgba(18, 32, 70, 0.20);
+  --shadow-blue: 0 12px 28px rgba(47, 107, 242, 0.30);
 
-  --radius-lg: 24px;
-  --radius: 18px;
-  --radius-sm: 12px;
+  --font: 'Plus Jakarta Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+  --font-display: 'Plus Jakarta Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+  --radius-lg: 26px;
+  --radius: 20px;
+  --radius-sm: 14px;
 
   --gutter: 16px;
   --max-width: 560px;
-  --nav-h: 64px;
+  --nav-h: 66px;
   --safe-top: env(safe-area-inset-top, 0px);
   --safe-bottom: env(safe-area-inset-bottom, 0px);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #081214;
-    --bg-glow: rgba(63, 207, 174, 0.10);
-    --surface: #0f1d20;
-    --surface-2: #16292d;
-    --border: rgba(200, 240, 230, 0.09);
-    --text: #e6f2ef;
-    --text-2: #a2b7b2;
-    --text-3: #6e8682;
-
-    --accent: #3fcfae;
-    --accent-strong: #7be3c9;
-    --accent-soft: rgba(63, 207, 174, 0.14);
-    --on-accent: #04221b;
-
-    --ember: #ff7a45;
-    --ember-soft: rgba(255, 122, 69, 0.15);
-    --danger: #ff6b5e;
-
-    --shadow: 0 1px 0 rgba(255, 255, 255, 0.03) inset, 0 10px 30px rgba(0, 0, 0, 0.35);
-    --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.6);
-  }
 }

@@ -1,6 +1,6 @@
 // Service worker: makes Exhale work offline after the first visit.
 // Bump VERSION whenever you deploy changes so phones pick up the new files.
-const VERSION = 'exhale-v1.0.0';
+const VERSION = 'exhale-v1.1.0';
 
 const APP_SHELL = [
   './',

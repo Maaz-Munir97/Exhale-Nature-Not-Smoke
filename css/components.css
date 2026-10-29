@@ -20,10 +20,11 @@
   transform: scale(0.98);
 }
 
-.btn--primary { background: var(--accent); color: var(--on-accent); }
+.btn--primary { background: var(--grad-primary); color: var(--on-accent); box-shadow: var(--shadow-blue); }
+.btn--primary:hover { filter: brightness(1.05); }
 .btn--ember { background: var(--ember); color: #fff; }
 .btn--soft { background: var(--accent-soft); color: var(--accent-strong); }
-.btn--ghost { background: transparent; color: var(--accent-strong); border: 1px solid var(--border); }
+.btn--ghost { background: var(--surface); color: var(--accent-strong); border: 1.5px solid var(--border-strong); }
 .btn--danger { background: transparent; color: var(--danger); border: 1px solid color-mix(in srgb, var(--danger) 35%, transparent); }
 .btn--block { display: flex; width: 100%; }
 .btn--lg { min-height: 56px; font-size: 17px; border-radius: 16px; }
@@ -78,7 +79,7 @@
 .card {
   display: grid;
   gap: 12px;
-  padding: 18px;
+  padding: 20px;
   border-radius: var(--radius);
   background: var(--surface);
   border: 1px solid var(--border);
@@ -86,9 +87,28 @@
 }
 
 .card--accent {
-  background: linear-gradient(160deg, var(--accent-soft), transparent), var(--surface);
-  border-color: color-mix(in srgb, var(--accent) 30%, transparent);
+  background: linear-gradient(160deg, var(--accent-soft), transparent 70%), var(--surface);
+  border-color: rgba(47, 107, 242, 0.25);
 }
+
+.card-head h3 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.card-icon {
+  display: inline-grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  flex: none;
+  border-radius: 11px;
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.card-icon .icon { width: 18px; height: 18px; }
 
 .card-head {
   display: flex;
@@ -117,18 +137,21 @@
   display: inline-block;
   padding: 9px 13px;
   border-radius: 99px;
-  border: 1px solid var(--border);
-  background: var(--surface-2);
+  border: 1.5px solid var(--border-strong);
+  background: var(--surface);
+  color: var(--text-2);
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
   text-align: left;
+  transition: all 0.15s ease;
 }
 
 .chip input:checked + span {
-  background: var(--accent);
-  border-color: var(--accent);
+  background: var(--grad-primary);
+  border-color: transparent;
   color: var(--on-accent);
+  box-shadow: 0 6px 16px rgba(47, 107, 242, 0.25);
 }
 
 .chip input:focus-visible + span {
@@ -145,9 +168,16 @@
 }
 
 .ring svg { width: 100%; height: 100%; }
-.ring-track { fill: none; stroke: var(--surface-2); }
+.ring-track { fill: none; stroke: var(--surface-3); }
 .ring-value { fill: none; stroke: var(--accent); stroke-linecap: round; transition: stroke-dashoffset 0.6s ease; }
-.ring--ember .ring-value { stroke: var(--ember); }
+
+/* Ring sitting on the blue hero card */
+.ring--light .ring-track { stroke: rgba(255, 255, 255, 0.22); }
+.ring--light .ring-value { stroke: #ffffff; filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.6)); }
+.ring--light .ring-kicker,
+.ring--light .ring-sub,
+.ring--light .ring-big small { color: rgba(255, 255, 255, 0.8); }
+.ring--light .ring-big { color: #fff; }
 
 .ring-content {
   position: absolute;
@@ -205,14 +235,14 @@
   height: 26px;
   flex: none;
   border-radius: 8px;
-  border: 2px solid var(--border);
-  background: var(--surface-2);
+  border: 2px solid var(--border-strong);
+  background: var(--surface);
   color: transparent;
   transition: all 0.18s ease;
 }
 
 .step-box .icon { width: 16px; height: 16px; stroke-width: 3; }
-.step input:checked + .step-box { background: var(--accent); border-color: var(--accent); color: var(--on-accent); transform: scale(1.05); }
+.step input:checked + .step-box { background: var(--grad-primary); border-color: transparent; color: var(--on-accent); transform: scale(1.05); box-shadow: 0 4px 10px rgba(47, 107, 242, 0.3); }
 .step input:checked ~ .step-text { color: var(--text-3); text-decoration: line-through; text-decoration-color: var(--text-3); }
 .step input:focus-visible + .step-box { outline: 2px solid var(--accent); outline-offset: 2px; }
 .step input:disabled ~ * { opacity: 0.6; cursor: default; }
@@ -230,7 +260,7 @@
   transition: background 0.25s ease;
 }
 
-.sheet-backdrop.is-open { background: rgba(0, 0, 0, 0.45); }
+.sheet-backdrop.is-open { background: rgba(18, 32, 70, 0.4); backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px); }
 
 .sheet {
   width: 100%;
@@ -269,7 +299,7 @@
   padding: 12px 18px;
   border-radius: 14px;
   background: var(--text);
-  color: var(--bg);
+  color: #fff;
   font-weight: 600;
   font-size: 15px;
   box-shadow: var(--shadow-lg);
@@ -321,7 +351,7 @@
   display: block;
   height: 100%;
   border-radius: inherit;
-  background: linear-gradient(90deg, var(--accent), var(--accent-strong));
+  background: var(--grad-sky);
   transition: width 0.6s ease;
 }
 
@@ -338,7 +368,7 @@
 
 .bar-label { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .bar { height: 10px; border-radius: 9px; background: var(--surface-2); overflow: hidden; }
-.bar span { display: block; height: 100%; background: var(--ember); border-radius: inherit; }
+.bar span { display: block; height: 100%; background: var(--grad-sky); border-radius: inherit; }
 .bar-count { text-align: right; font-weight: 700; font-variant-numeric: tabular-nums; }
 
 /* Hour chart */
@@ -353,10 +383,10 @@
 .hour-bar {
   height: max(var(--h), 3px);
   border-radius: 4px 4px 2px 2px;
-  background: color-mix(in srgb, var(--accent) 45%, var(--surface-2));
+  background: #c9dafc;
 }
 
-.hour-bar.is-peak { background: var(--ember); }
+.hour-bar.is-peak { background: var(--grad-primary); }
 
 .hour-axis {
   display: flex;

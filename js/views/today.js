@@ -25,6 +25,7 @@ function hero(state, s) {
   if (s.phase === 'upcoming') {
     return ring({
       value: 0,
+      tone: 'light',
       content: `<span class="ring-kicker">Starts</span><span class="ring-big">${shortDate(dateForDay(profile, 1))}</span><span class="ring-sub">Get ready. Explore the Plan.</span>`,
     });
   }
@@ -32,12 +33,13 @@ function hero(state, s) {
     const daysLeft = quitDayNumber(profile) - s.day;
     return ring({
       value: progress,
-      tone: 'ember',
+      tone: 'light',
       content: `<span class="ring-kicker">Quit day in</span><span class="ring-big">${plural(daysLeft, 'day')}</span><span class="ring-sub">${shortDate(s.quitAt)}</span>`,
     });
   }
   return ring({
     value: progress,
+    tone: 'light',
     content: `<span class="ring-kicker">Smoke-free for</span><span class="ring-big ring-clock" data-live-clock>${liveClock(s.smokeFreeMs)}</span>
       <span class="ring-sub">${s.phase === 'graduated' ? 'Protocol complete 🎉' : `Day ${s.day} of ${PROGRAM_LENGTH}`}</span>`,
   });
@@ -47,9 +49,9 @@ function quickStats(state, s) {
   const { currency } = state.profile;
   return `
     <div class="mini-stats">
-      <div><span class="mini-value">${money(s.moneySaved, currency)}</span><span class="mini-label">saved</span></div>
-      <div><span class="mini-value">${number(Math.floor(s.avoided))}</span><span class="mini-label">not smoked</span></div>
-      <div><span class="mini-value">${s.cravingsBeaten}</span><span class="mini-label">cravings beaten</span></div>
+      <div>${icons.coins}<span class="mini-value">${money(s.moneySaved, currency)}</span><span class="mini-label">saved</span></div>
+      <div>${icons.ban}<span class="mini-value">${number(Math.floor(s.avoided))}</span><span class="mini-label">not smoked</span></div>
+      <div>${icons.leaf}<span class="mini-value">${s.cravingsBeaten}</span><span class="mini-label">cravings beaten</span></div>
     </div>`;
 }
 
@@ -76,7 +78,7 @@ function prepCard(state, s) {
   }
   return `
     <section class="card">
-      <header class="card-head"><h3>${allowance ? 'Step-down target' : 'Smoking tracker'}</h3><span class="eyebrow">${PHASE_LABELS.prepare}</span></header>
+      <header class="card-head"><h3><span class="card-icon">${icons.flame}</span>${allowance ? 'Step-down target' : 'Smoking tracker'}</h3><span class="eyebrow">${PHASE_LABELS.prepare}</span></header>
       ${body}
       <button class="btn btn--soft btn--block" data-log-cig>${icons.plus} Log a cigarette</button>
     </section>`;
@@ -86,7 +88,7 @@ function moodCard(state) {
   const today = state.checkins[toDateKey()];
   return `
     <section class="card">
-      <header class="card-head"><h3>How are you feeling?</h3></header>
+      <header class="card-head"><h3><span class="card-icon">${icons.heart}</span>How are you feeling?</h3></header>
       <div class="mood-row">
         ${MOODS.map(
           (m) => `<button type="button" class="mood ${today?.mood === m.value ? 'is-selected' : ''}" data-mood="${m.value}" aria-label="${m.label}">
@@ -108,15 +110,18 @@ export default {
 
     host.innerHTML = `
       <header class="page-head">
-        <div>
+        <span class="avatar" aria-hidden="true">${esc((profile.name || 'E').charAt(0).toUpperCase())}</span>
+        <div class="grow">
           <p class="eyebrow">${PHASE_LABELS[s.phase]}${s.day >= 1 && s.day <= PROGRAM_LENGTH ? ` · Day ${s.day}` : ''}</p>
           <h1 class="h1">${greeting(now)}${profile.name ? `, ${esc(profile.name)}` : ''}</h1>
         </div>
         <a href="#/settings" class="icon-btn" aria-label="Settings">${icons.settings}</a>
       </header>
 
-      <section class="hero">${hero(state, s)}</section>
-      ${quickStats(state, s)}
+      <section class="hero-card">
+        ${hero(state, s)}
+        ${quickStats(state, s)}
+      </section>
 
       ${s.isQuit ? `
         <a href="#/sos" class="sos-cta">
@@ -137,7 +142,7 @@ export default {
       ${s.isQuit ? moodCard(state) : ''}
 
       <section class="card tip-card">
-        <span class="eyebrow">Tip of the day</span>
+        <span class="eyebrow">${icons.sparkle} Tip of the day</span>
         <p>${esc(tip)}</p>
       </section>
 
